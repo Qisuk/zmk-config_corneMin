@@ -10,14 +10,88 @@
 
 / {
     behaviors {
-        testb: testb {
-            compatible = "zmk,behavior-caps-word";
-            label = "TESTB";
+        space_lt: space_lt {
+            compatible = "zmk,behavior-toggle-layer";
+            label = "SPACE_LT";
+            #binding-cells = <1>;
+            toggle-mode = "off";
+        };
+
+        hyphenAccess: hyphenAccess {
+            compatible = "zmk,behavior-tap-dance";
+            label = "HYPHENACCESS";
             #binding-cells = <0>;
-            continue-list = <A>;
-            mods = <(MOD_LCTL)>;
+            tapping-term-ms = <200>;
+            bindings = <&kp SEMICOLON>, <&kp MINUS>;
+        };
+
+        tap_layer: tap_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAP_LAYER";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <10>;
+            quick-tap-ms = <(-1)>;
+            flavor = "balanced";
+        };
+
+        slow_tap: slow_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SLOW_TAP";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <130>;
+            quick-tap-ms = <150>;
+        };
+
+        fast_tap: fast_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "FAST_TAP";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <140>;
+            flavor = "balanced";
+        };
+
+        delete_word_backspace: delete_word_backspace {
+            compatible = "zmk,behavior-tap-dance";
+            label = "DELETE_WORD_BACKSPACE";
+            #binding-cells = <0>;
+            bindings = <&kp BACKSPACE>, <&kp LC(BACKSPACE)>;
+
+            tapping-term-ms = <180>;
+        };
+
+        delete_word_forward: delete_word_forward {
+            compatible = "zmk,behavior-tap-dance";
+            label = "DELETE_WORD_FORWARD";
+            #binding-cells = <0>;
+            bindings = <&kp DELETE>, <&kp LC(DELETE)>;
+        };
+
+        new_behavior: new_behavior {
+            compatible = "zmk,behavior-tap-dance";
+            label = "NEW_BEHAVIOR";
+            #binding-cells = <0>;
+            tapping-term-ms = <220>;
+            bindings = <&kp SEMICOLON>, <&kp MINUS>;
         };
     };
+
+    macros {
+        copy: copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&none>;
+            label = "COPY";
+        };
+    };
+
 
     keymap {
         compatible = "zmk,keymap";
