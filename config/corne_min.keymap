@@ -105,11 +105,11 @@
             // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
-            bindings = <
-&kp TAB    &kp Q  &kp W  &kp E     &kp R  &kp T        &kp Y    &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&kp LCTRL  &kp A  &kp S  &kp D     &kp F  &kp G        &kp H    &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z  &kp X  &kp C     &kp V  &kp B        &kp N    &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
-                         &kp LGUI  &mo 1  &kp SPACE    &kp RET  &mo 2  &kp RALT
+              bindings = <
+&mt LS(LA(LEFT_CONTROL)) ESCAPE  &kp Q                 &kp W                 &slow_tap LC(F) F         &slow_tap PRINTSCREEN P  &slow_tap LC(B) B    &kp J        &kp L                    &kp U              &kp Y                     &kp EQUAL              &kp BACKSPACE
+&lt 1 TAB                        &slow_tap LEFT_GUI A  &slow_tap LEFT_ALT R  &slow_tap LEFT_CONTROL S  &fast_tap LEFT_SHIFT T   &kp G                &kp M        &fast_tap RIGHT_SHIFT N  &slow_tap RCTRL E  &slow_tap LS(LEFT_ALT) I  &slow_tap RIGHT_WIN O  &kp SQT
+&kp NON_US_BACKSLASH             &kp Z                 &slow_tap LC(X) X     &slow_tap LC(C) C         &kp D                    &slow_tap LC(V) V    &kp K        &kp H                    &kp COMMA          &kp DOT                   &kp FSLH               &hyphenAccess
+                                                                             &lt 1 TAB                 &kp LSHFT                &lt 2 SPACE          &lt 2 ENTER  &kp RIGHT_SHIFT          &lt 3 DEL
             >;
         };
 
