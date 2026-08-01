@@ -144,7 +144,14 @@
                                          &kp LGUI  &trans    &kp LSHFT    &kp LSHFT  &trans  &kp NUMBER_0
             >;
         };
-
+        special_layer {
+            bindings = <
+&trans  &kp F1        &kp F2        &kp F3         &kp F4          &kp F5             &kp F6           &kp F7  &kp F8  &kp F9  &kp F10  &kp PRINTSCREEN
+&trans  &kp LEFT_GUI  &kp LEFT_ALT  &kp LS(LCTRL)  &kp LEFT_SHIFT  &kp F11            &kp F12          &trans  &trans  &trans  &trans   &trans
+&trans  &trans        &trans        &trans         &kp SCROLLLOCK  &kp PAUSE_BREAK    &trans           &trans  &trans  &trans  &trans   &tog 3
+                                    &caps_word     &trans          &kp LEFT_SHIFT     &kp RIGHT_SHIFT  &trans  &trans
+            >;
+        };
 
         extra1 {
             display-name = "Extra-1";
