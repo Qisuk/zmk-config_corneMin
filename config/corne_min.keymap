@@ -130,9 +130,7 @@
             >;
         };
 
-        raise_layer {
-            display-name = "Raise";
-
+        nums_layer {
             // -----------------------------------------------------------------------------------------
             // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
             // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
@@ -140,12 +138,13 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp TAB         &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC
-&studio_unlock  &trans    &trans  &trans    &trans    &trans       &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT       &trans    &trans  &trans    &trans    &trans       &kp UNDER  &kp PLUS   &kp LBRC   &kp RBRC  &kp PIPE  &kp TILDE
-                                  &kp LGUI  &trans    &kp SPACE    &kp RET    &trans     &kp RALT
+&kp GRAVE      &trans            &trans  &kp LBRC  &kp RBRC  &kp PRCNT    &kp PLUS   &kp N1  &kp N2        &kp N3  &kp EQUAL        &delete_word_backspace
+&kp TAB        &kp LT            &kp GT  &kp LPAR  &kp RPAR  &trans       &kp MINUS  &kp N4  &kp N5        &kp N6  &kp NON_US_HASH  &kp AT
+&kp BACKSLASH  &kp SINGLE_QUOTE  &trans  &kp LBKT  &kp RBKT  &trans       &kp UNDER  &kp N7  &kp N8        &kp N9  &kp EXCL         &tog 2
+                                         &kp LGUI  &trans    &kp LSHFT    &kp LSHFT  &trans  &kp NUMBER_0
             >;
         };
+
 
         extra1 {
             display-name = "Extra-1";
