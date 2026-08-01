@@ -8,88 +8,14 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
-
 / {
     behaviors {
-        space_lt: space_lt {
-            compatible = "zmk,behavior-toggle-layer";
-            label = "SPACE_LT";
-            #binding-cells = <1>;
-            toggle-mode = "off";
-        };
-
-        hyphenAccess: hyphenAccess {
-            compatible = "zmk,behavior-tap-dance";
-            label = "HYPHENACCESS";
+        testb: testb {
+            compatible = "zmk,behavior-caps-word";
+            label = "TESTB";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp SEMICOLON>, <&kp MINUS>;
-        };
-
-        tap_layer: tap_layer {
-            compatible = "zmk,behavior-hold-tap";
-            label = "TAP_LAYER";
-            bindings = <&mo>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <10>;
-            quick-tap-ms = <(-1)>;
-            flavor = "balanced";
-        };
-
-        slow_tap: slow_tap {
-            compatible = "zmk,behavior-hold-tap";
-            label = "SLOW_TAP";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <300>;
-            flavor = "tap-preferred";
-            require-prior-idle-ms = <130>;
-            quick-tap-ms = <150>;
-        };
-
-        fast_tap: fast_tap {
-            compatible = "zmk,behavior-hold-tap";
-            label = "FAST_TAP";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <140>;
-            flavor = "balanced";
-        };
-
-        delete_word_backspace: delete_word_backspace {
-            compatible = "zmk,behavior-tap-dance";
-            label = "DELETE_WORD_BACKSPACE";
-            #binding-cells = <0>;
-            bindings = <&kp BACKSPACE>, <&kp LC(BACKSPACE)>;
-
-            tapping-term-ms = <180>;
-        };
-
-        delete_word_forward: delete_word_forward {
-            compatible = "zmk,behavior-tap-dance";
-            label = "DELETE_WORD_FORWARD";
-            #binding-cells = <0>;
-            bindings = <&kp DELETE>, <&kp LC(DELETE)>;
-        };
-
-        new_behavior: new_behavior {
-            compatible = "zmk,behavior-tap-dance";
-            label = "NEW_BEHAVIOR";
-            #binding-cells = <0>;
-            tapping-term-ms = <220>;
-            bindings = <&kp SEMICOLON>, <&kp MINUS>;
-        };
-    };
-
-    macros {
-        copy: copy {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&none>;
-            label = "COPY";
+            continue-list = <A>;
+            mods = <(MOD_LCTL)>;
         };
     };
 
@@ -97,6 +23,8 @@
         compatible = "zmk,keymap";
 
         default_layer {
+            display-name = "Base";
+
             // -----------------------------------------------------------------------------------------
             // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
             // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
@@ -104,14 +32,16 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&mt LS(LA(LEFT_CONTROL)) ESCAPE  &kp Q                 &kp W                 &slow_tap LC(F) F         &slow_tap PRINTSCREEN P  &slow_tap LC(B) B    &kp J        &kp L                    &kp U              &kp Y                     &kp EQUAL              &kp BACKSPACE
-&lt 1 TAB                        &slow_tap LEFT_GUI A  &slow_tap LEFT_ALT R  &slow_tap LEFT_CONTROL S  &fast_tap LEFT_SHIFT T   &kp G                &kp M        &fast_tap RIGHT_SHIFT N  &slow_tap RCTRL E  &slow_tap LS(LEFT_ALT) I  &slow_tap RIGHT_WIN O  &kp SQT
-&kp NON_US_BACKSLASH             &kp Z                 &slow_tap LC(X) X     &slow_tap LC(C) C         &kp D                    &slow_tap LC(V) V    &kp K        &kp H                    &kp COMMA          &kp DOT                   &kp FSLH               &hyphenAccess
-                                                                             &lt 1 TAB                 &kp LSHFT                &lt 2 SPACE          &lt 2 ENTER  &kp RIGHT_SHIFT          &lt 3 DEL
+&kp TAB    &kp Q  &kp W  &kp E     &kp R  &kp T        &kp Y    &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp LCTRL  &kp A  &kp S  &kp D     &kp F  &kp G        &kp H    &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z  &kp X  &kp C     &kp V  &kp B        &kp N    &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
+                         &kp LGUI  &mo 1  &kp SPACE    &kp RET  &mo 2  &kp RALT
             >;
         };
 
-        nav_layer {
+        lower_layer {
+            display-name = "Lower";
+
             // -----------------------------------------------------------------------------------------
             // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
             // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
@@ -119,14 +49,16 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&bt BT_NXT       &rgb_ug RGB_SPD  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &rgb_ug RGB_SPI  &rgb_ug RGB_BRI    &msc SCRL_UP    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &kp BSPC
-&rgb_ug RGB_TOG  &kp LGUI         &kp LALT         &kp LCTRL        &kp LSHFT        &rgb_ug RGB_BRD    &msc SCRL_DOWN  &kp LEFT        &kp DOWN        &kp UP        &kp RIGHT        &rgb_ug RGB_TOG
-&bt BT_CLR       &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_SEL 4       &mkp MCLK       &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END          &tog 1
-                                                   &none            &trans           &kp SPACE          &kp RET         &mkp LCLK       &mkp RCLK
+&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &kp N6    &kp N7    &kp N8    &kp N9     &kp N0  &kp BSPC
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans  &trans
+&kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &trans    &trans    &trans     &trans  &trans
+                                        &kp LGUI      &trans        &kp SPACE       &kp RET   &trans    &kp RALT
             >;
         };
 
-        nums_layer {
+        raise_layer {
+            display-name = "Raise";
+
             // -----------------------------------------------------------------------------------------
             // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
             // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
@@ -134,29 +66,26 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE      &trans            &trans  &kp LBRC  &kp RBRC  &kp PRCNT    &kp PLUS   &kp N1  &kp N2        &kp N3  &kp EQUAL        &delete_word_backspace
-&kp TAB        &kp LT            &kp GT  &kp LPAR  &kp RPAR  &trans       &kp MINUS  &kp N4  &kp N5        &kp N6  &kp NON_US_HASH  &kp AT
-&kp BACKSLASH  &kp SINGLE_QUOTE  &trans  &kp LBKT  &kp RBKT  &trans       &kp UNDER  &kp N7  &kp N8        &kp N9  &kp EXCL         &tog 2
-                                         &kp LGUI  &trans    &kp LSHFT    &kp LSHFT  &trans  &kp NUMBER_0
+&kp TAB         &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC
+&studio_unlock  &trans    &trans  &trans    &trans    &trans       &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT  &kp BSLH  &kp GRAVE
+&kp LSHFT       &trans    &trans  &trans    &trans    &trans       &kp UNDER  &kp PLUS   &kp LBRC   &kp RBRC  &kp PIPE  &kp TILDE
+                                  &kp LGUI  &trans    &kp SPACE    &kp RET    &trans     &kp RALT
             >;
         };
 
-        special_layer {
-            bindings = <
-&trans  &kp F1        &kp F2        &kp F3         &kp F4          &kp F5             &kp F6           &kp F7  &kp F8  &kp F9  &kp F10  &kp PRINTSCREEN
-&trans  &kp LEFT_GUI  &kp LEFT_ALT  &kp LS(LCTRL)  &kp LEFT_SHIFT  &kp F11            &kp F12          &trans  &trans  &trans  &trans   &rgb_ug RGB_TOG
-&trans  &trans        &trans        &trans         &kp SCROLLLOCK  &kp PAUSE_BREAK    &trans           &trans  &trans  &trans  &trans   &tog 3
-                                    &caps_word     &trans          &kp LEFT_SHIFT     &kp RIGHT_SHIFT  &trans  &trans
-            >;
+        extra1 {
+            display-name = "Extra-1";
+            status = "reserved";
         };
 
-        ShiftLayer {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
-            >;
+        extra2 {
+            display-name = "Extra-2";
+            status = "reserved";
+        };
+
+        extra3 {
+            display-name = "Extra-3";
+            status = "reserved";
         };
     };
 };
